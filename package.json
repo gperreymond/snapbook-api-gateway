@@ -7,7 +7,11 @@
     "email": "gperreymond@gmail.com"
   },
   "dependencies": {
+    "blipp": "2.2.1",
     "hapi": "8.8.0",
+    "hapi-swaggered": "2.3.0",
+    "hapi-swaggered-ui": "2.0.1",
+    "joi": "6.6.1",
     "pmx": "0.3.30",
     "seneca": "0.6.4"
   },

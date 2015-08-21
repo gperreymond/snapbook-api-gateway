@@ -6,21 +6,31 @@ var routes = [];
 
 routes.push({
   method: 'POST',
-  path: '/slack/error',
+  path: '/slack/message',
   handler: function (request, reply) {
     var seneca = require('seneca')()
       .client({type:'tcp'})
       .ready(function(err) {
-        if (err) return seneca.close(); 
-        seneca.act({
-          role: 'slack', 
-          cmd: 'error',
-          source: request.payload.source,
-          title: request.payload.title,
-          message: request.payload.message
-        }, function( err, result_seneca ) {
-          reply(result_seneca);
-        });
+        if (err) {
+          return reply(err).code(500);
+        } else {
+          seneca.act({
+            role: 'slack', 
+            cmd: 'message',
+            source: request.payload.source,
+            state: request.payload.state,
+            title: request.payload.title,
+            message: request.payload.message
+          }, function( err_seneca, result_seneca ) {
+            if (err_seneca) {
+              reply(err_seneca).code(500);
+              return seneca.close();
+            } else {
+              reply(result_seneca);
+              return seneca.close();
+            }
+          });
+        }
       });
   },
   config: {
@@ -28,8 +38,11 @@ routes.push({
     description: "Poster un message sur Slack #console en mode ERROR",
     notes: "Poster un message sur Slack #console en mode ERROR",
     validate: {
-      payload: {
-        source: Joi.string().required().description('Source du message'),
+      params: {
+        source: Joi.object({
+          name: Joi.string().required().description('Source du message'),
+          in: 'formData'}),
+        state: Joi.string().required().description('Etat du message'),
         title: Joi.string().required().description('Titre du message'),
         message: Joi.string().required().description('Le message')
       }

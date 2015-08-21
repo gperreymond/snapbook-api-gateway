@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name" : "snapbook-api-gateway",
+            "script" : "src/index.js",
+            "exec_mode" : "cluster_mode",
+            "instances" : 4,
+            "watch" : false,
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    ]
+}

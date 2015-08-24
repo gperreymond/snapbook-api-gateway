@@ -12,3 +12,5 @@ VOLUME [ "/dsi/logs" ]
 USER app
 
 RUN npm install
+
+EXPOSE  8080

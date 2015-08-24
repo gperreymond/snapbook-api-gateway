@@ -38,10 +38,8 @@ routes.push({
     description: "Poster un message sur Slack #console en mode ERROR",
     notes: "Poster un message sur Slack #console en mode ERROR",
     validate: {
-      params: {
-        source: Joi.object({
-          name: Joi.string().required().description('Source du message'),
-          in: 'formData'}),
+      payload: { 
+        source: Joi.string().required().description('Source du message'),
         state: Joi.string().required().description('Etat du message'),
         title: Joi.string().required().description('Titre du message'),
         message: Joi.string().required().description('Le message')

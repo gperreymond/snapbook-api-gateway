@@ -3,12 +3,9 @@
         {
             "name" : "snapbook-api-gateway",
             "script" : "src/index.js",
-            "exec_mode" : "cluster_mode",
-            "instances" : 4,
             "watch" : false,
-            "env": {
-                "NODE_ENV": "production"
-            }
+            "error_file": "/dsi/logs/snapbook-api-gateway.error",
+            "out_file": "/dsi/logs/snapbook-api-gateway.log"
         }
     ]
 }

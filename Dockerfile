@@ -5,8 +5,9 @@ MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
 # PREPARE
 
-USER app
 COPY . /src
 RUN cd /src; npm install
+
+USER app
 
 EXPOSE 8080

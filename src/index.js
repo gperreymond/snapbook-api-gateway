@@ -1,8 +1,5 @@
 "use strict";
 
-var pmx = require('pmx'); 
-pmx.init();
-
 var async = require("async");
 
 var Hapi = require('hapi');

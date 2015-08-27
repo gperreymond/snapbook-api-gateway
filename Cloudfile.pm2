@@ -8,7 +8,6 @@
             "out_file": "/home/ubuntu/workspace/logs/snapbook-api-gateway.log",
             "env": {
                 "NODE_ENV": "development",
-                "WEBHOOK_CONSOLE_URL": "https://hooks.slack.com/services/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"
             }
         }
     ]

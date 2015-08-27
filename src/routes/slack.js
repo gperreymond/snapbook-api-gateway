@@ -23,6 +23,7 @@ routes.push({
             message: request.payload.message
           }, function( err_seneca, result_seneca ) {
             if (err_seneca) {
+              console.log(err_seneca,result_seneca);
               reply(err_seneca).code(500);
               return seneca.close();
             } else {
@@ -38,12 +39,15 @@ routes.push({
     description: "Poster un message sur Slack #console en mode ERROR",
     notes: "Poster un message sur Slack #console en mode ERROR",
     validate: {
-      payload: { 
+      payload: Joi.object().keys({ 
+        state: Joi.string().required().description('Etat du message').valid('a', 'b'),
         source: Joi.string().required().description('Source du message'),
-        state: Joi.string().required().description('Etat du message'),
         title: Joi.string().required().description('Titre du message'),
         message: Joi.string().required().description('Le message')
-      }
+      })
+    },
+    payload: {
+      allow: 'multipart/form-data'
     },
   	response: {
 		  // schema: PatternSchema.Joi.description("Pattern"),

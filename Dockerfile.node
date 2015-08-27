@@ -1,6 +1,6 @@
 # DOCKER IMAGE
 
-FROM scratch
+FROM snapbook/node:onbuild
 MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
 # PREPARE

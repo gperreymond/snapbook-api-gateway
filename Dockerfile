@@ -5,11 +5,10 @@ MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
 # PREPARE
 
-COPY . /
-RUN cd /; npm install
+COPY snapbook-api-gateway /
+COPY dist /
 
-USER app
-
-EXPOSE 3000
+EXPOSE 8080
+ENTRYPOINT ["/snapbook-api-gateway"]
 
 

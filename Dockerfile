@@ -8,6 +8,8 @@ MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 COPY src/ /app/
 COPY package.json /app/
 WORKDIR /app/
+
+RUN cd /app
 RUN npm install
 
 # END

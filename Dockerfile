@@ -5,8 +5,7 @@ MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
 # PREPARE
 
-COPY snapbook-api-gateway /
-COPY dist /
+COPY src /
 
 EXPOSE 8080
 ENTRYPOINT ["/snapbook-api-gateway"]

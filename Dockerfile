@@ -5,7 +5,12 @@ MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
 # PREPARE
 
-COPY src /
+COPY src/ /app/
+COPY package.json /app/
+WORKDIR /app/
+RUN npm install
+
+# END
 
 EXPOSE 8080
 ENTRYPOINT ["/snapbook-api-gateway"]

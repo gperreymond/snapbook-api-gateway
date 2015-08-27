@@ -1,16 +1,15 @@
-FROM node:onbuild
+# DOCKER IMAGE
+
+FROM snapbook/node:onbuild
 MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
-RUN npm install -g pm2 
-RUN useradd -m app && chown app:app . -R
+# PREPARE
 
-RUN  mkdir /dsi && chown app:app /dsi
-RUN  mkdir /dsi/logs && chown app:app /dsi/logs
-
-VOLUME [ "/dsi/logs" ]
+COPY . /
+RUN cd /; npm install
 
 USER app
 
-RUN npm install
+EXPOSE 3000
 
-EXPOSE  8080
+

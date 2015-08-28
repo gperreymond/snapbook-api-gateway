@@ -1,20 +1,6 @@
-# DOCKER IMAGE
-
-FROM scratch
+FROM snapbook/nodejs
 MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
-# PREPARE
-
-COPY src/ /app/
-COPY package.json /app/
-WORKDIR /app/
-
-RUN cd /app
-RUN npm install
-
-# END
-
-EXPOSE 8080
-ENTRYPOINT ["/snapbook-api-gateway"]
-
-
+ADD start.sh /tmp/
+RUN chmod +x /tmp/start.sh
+CMD ./tmp/start.sh

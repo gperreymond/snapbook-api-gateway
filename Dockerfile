@@ -1,6 +1,5 @@
-FROM snapbook/nodejs
+FROM snapbook/nodejs:latest
 MAINTAINER Snapbook Labs <gperreymond@gmail.com>
 
-ADD start.sh /tmp/
-RUN chmod +x /tmp/start.sh
-CMD ./tmp/start.sh
+WORKDIR /
+CMD ["node", "src/index.js"] 

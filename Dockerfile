@@ -14,8 +14,5 @@ WORKDIR /usr/src/app
 # Install your application's dependencies
 RUN npm install
 
-# Expose the node.js port to the Docker host.
-EXPOSE 8080
-
 # This is the stock express binary to start the app.
-CMD [ "bin/www" ]
+CMD ["/bin/bash"]

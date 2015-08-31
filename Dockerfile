@@ -6,6 +6,7 @@ MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
 
 # Add the current working folder as a mapped folder at /usr/src/app
 COPY ./package.json /usr/src/app/package.json
+COPY ./Dockerfile.pm2 /usr/src/app/Dockerfile.pm2
 COPY ./src /usr/src/app
 
 # Set the current working directory to the new mapped folder.
@@ -19,4 +20,4 @@ RUN npm install
 EXPOSE  9000
 
 # Run app using node
-CMD ["pm2", "Dockerfile.pm2"]
+CMD ["pm2", "start" "Dockerfile.pm2"]

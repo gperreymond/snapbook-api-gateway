@@ -5,14 +5,13 @@ FROM node:0.12.6
 MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
 
 # Add the current working folder as a mapped folder at /usr/src/app
-ADD src /usr/src/app
-COPY package.json /usr/src/app
+COPY . /usr/src/app
 
 # Set the current working directory to the new mapped folder.
 WORKDIR /usr/src/app
 
-# Install your application's dependencies
+# Install application's dependencies
 RUN npm install
 
-# This is the stock express binary to start the app.
+# This is the end.
 CMD ["/bin/bash"]

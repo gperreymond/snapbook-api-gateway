@@ -12,8 +12,10 @@ COPY ./src /usr/src/app
 # Set the current working directory to the new mapped folder.
 WORKDIR /usr/src/app
 
-# Install application's dependencies
+# Install global's dependencies
 RUN npm install -g pm2
+
+# Install application's dependencies
 RUN npm install
 
 # Expose port

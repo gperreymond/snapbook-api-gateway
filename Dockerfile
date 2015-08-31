@@ -14,4 +14,4 @@ WORKDIR /usr/src/app
 RUN npm install
 
 # This is the end.
-CMD ["/bin/bash"]
+CMD ["node", "index.js"]

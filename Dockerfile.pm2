@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name" : "snapbook-api-gateway",
+            "script" : "index.js",
+            "watch" : false,
+            "env": {
+                "NODE_ENV": "production",
+                "IP": "0.0.0.0",
+                "PORT": 9000
+            }
+        }
+    ]
+}

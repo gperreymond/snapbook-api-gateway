@@ -12,10 +12,11 @@ COPY ./src /usr/src/app
 WORKDIR /usr/src/app
 
 # Install application's dependencies
+RUN npm install -g pm2
 RUN npm install
 
 # Expose port
-EXPOSE  8080
+EXPOSE  9000
 
 # Run app using node
-CMD ["node", "index.js"]
+CMD ["pm2", "Dockerfile.pm2"]

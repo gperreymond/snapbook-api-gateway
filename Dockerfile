@@ -1,5 +1,5 @@
 # Pull base image from stock node image.
-FROM node:0.12.6
+FROM node:0.12.7-slim
 
 # Maintainer
 MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
@@ -20,6 +20,3 @@ RUN npm install
 
 # Expose port
 EXPOSE  9000
-
-# Run app using node
-CMD ["pm2", "start" "Dockerfile.pm2"]

@@ -1,0 +1,3 @@
+test:
+  script:
+  - apt-get update -qy

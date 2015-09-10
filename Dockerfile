@@ -6,7 +6,7 @@ MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
 
 # Add the current working folder as a mapped folder at /usr/src/app
 COPY ./package.json /usr/src/app/package.json
-COPY ./Dockerfile.pm2 /usr/src/app/Dockerfile.pm2
+COPY ./app-docker.json /usr/src/app/app-docker.json
 COPY ./src /usr/src/app
 
 # Set the current working directory to the new mapped folder.

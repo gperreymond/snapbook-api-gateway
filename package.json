@@ -1,7 +1,7 @@
 {
   "name": "snapbook-api-gateway",
   "version": "1.0.0",
-  "description": "Module nodeJS pour poster sur Slack via un webhook.",
+  "description": "Snapbook API Gateway (HTTP)",
   "bin": {
     "snapbook-api-gateway": "./src/index.js" 
   },
@@ -11,6 +11,9 @@
   "author": {
     "name": "Gilles Perreymond",
     "email": "gperreymond@gmail.com"
+  },
+  "engines": {
+    "node": ">=0.12.0"
   },
   "dependencies": {
     "async": "1.4.2",

@@ -14,8 +14,8 @@ var server = new Hapi.Server({
 // configure server
 
 server.connection({ 
-	host: process.env.IP,
-	port: process.env.PORT,
+	host: process.env.IP || '0.0.0.0',
+	port: process.env.PORT || 80,
 	labels: ['api']
 });
 

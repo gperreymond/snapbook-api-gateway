@@ -19,4 +19,8 @@ RUN npm install -g pm2
 RUN npm install
 
 # Expose port
-EXPOSE  9000
+EXPOSE  80
+
+# Running
+
+CMD pm2 start app-docker.json

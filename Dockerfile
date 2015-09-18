@@ -18,5 +18,4 @@ RUN npm install
 EXPOSE  80
 
 # Running
-
 CMD node .

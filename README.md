@@ -8,4 +8,5 @@ https://hub.docker.com
 
 * docker build -t snapbook/api-gateway .
 * docker push snapbook/api-gateway:latest
+* https://github.com/socketio/socket.io/issues/2213
 

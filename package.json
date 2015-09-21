@@ -3,7 +3,7 @@
   "version": "2.5.0",
   "description": "Snapbook API Gateway (HTTP)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --ui bdd --reporter spec",
     "start": "index.js"
   },
   "author": {
@@ -29,11 +29,8 @@
     "vision": "3.0.0"
   },
   "devDependencies": {
-    "code": "1.5.0",
-    "expect.js": "0.3.1",
-    "lab": "5.17.0",
-    "should": "7.1.0",
-    "superagent": "1.4.0"
+    "chai": "3.2.0",
+    "chai-http": "1.0.0"
   },
   "private": true
 }

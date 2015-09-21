@@ -1,7 +1,5 @@
 "use strict";
 
-var Inert = require('inert');
-var Vision = require('vision');
 var HapiSwagger = require('hapi-swaggered');
 var HapiSwaggerUI = require('hapi-swaggered');
 
@@ -28,8 +26,7 @@ var SwaggerProvision = function(server) {
     path: '/docs'
   };
   server.register([
-    Inert,
-    Vision, {
+    {
       register: require('hapi-swaggered-ui'),
       options: optionsui
   }], function (err) {

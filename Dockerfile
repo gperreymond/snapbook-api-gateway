@@ -1,5 +1,5 @@
 # Pull base image from stock node image.
-FROM node:0.12.7-slim
+FROM node:0.12.7
 
 # Maintainer
 MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
@@ -15,7 +15,7 @@ WORKDIR /usr/src/app
 RUN npm install
 
 # Expose port
-EXPOSE  80
+EXPOSE 80
 
 # Running
 CMD node .

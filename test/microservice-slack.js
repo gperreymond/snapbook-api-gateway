@@ -7,17 +7,17 @@ chai.use(chaiHttp);
 
 describe('/swagger', function () {
   it('should return ok when the gateway is running', function (done) {
-    chai.request('http://localhost:3000')
-    .get('/swagger')
-    .end(function(err, res) {
-      try {
+    try {
+      chai.request('http://localhost:3000')
+      .get('/swagger')
+      .end(function(err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         done();
-      } catch (e) {
-        done(e);
-      }
-    });
+      });
+    } catch (e) {
+      done(e);
+    }
   });
 });
 

@@ -12,7 +12,7 @@ COPY ./src /usr/src/app
 WORKDIR /usr/src/app
 
 # Install application's dependencies
-RUN npm install
+RUN npm install --production
 
 # Expose port
 EXPOSE 80

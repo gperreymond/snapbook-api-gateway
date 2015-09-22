@@ -15,13 +15,12 @@ module.exports = function(grunt) {
 		},
 		run: {
     	server: {
-    		tests_suite: {
-	      	options: {
-	        	wait: false
-	      	},
-	      	cmd: 'node',
-	      	args: ['src/index.js']
-	    	}
+				options: {
+					wait: false,
+					quiet: true
+				},
+				cmd: 'node',
+				args: ['src/index.js']
     	}
   	},
 		jshint: {
@@ -33,15 +32,13 @@ module.exports = function(grunt) {
 			}
 		},
 		simplemocha: {
-			tests_suite: {
-				options: {
-					timeout: 3000,
-					ignoreLeaks: false,
-					ui: 'bdd',
-					reporter: 'spec'
-				},
-				all: { src: ['test/*.js'] }
-			}
+			options: {
+				timeout: 3000,
+				ignoreLeaks: false,
+				ui: 'bdd',
+				reporter: 'spec'
+			},
+			all: { src: ['test/*.js'] }
 		}
 	});
 	
@@ -51,11 +48,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-simple-mocha');
 	
 	grunt.registerTask('test', [
+		'jshint',
 		'env:tests_suite', 
-		'jshint', 
-		'run:server:tests_suite', 
-		'simplemocha:tests_suite',
-		'run:server:tests_suite'
+		'run:server', 
+		'simplemocha',
+		'stop:server'
 	]);
 	
 };

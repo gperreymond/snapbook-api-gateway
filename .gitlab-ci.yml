@@ -1,3 +1,4 @@
 test:
   script:
-  - apt-get update -qy
+  - npm install
+  - npm test

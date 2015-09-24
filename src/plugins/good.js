@@ -18,4 +18,6 @@ var GoodProvision = function(server) {
   });
 };
 
+if ( process.env.NODE_ENV=='test' ) GoodProvision = function(server) {};
+
 module.exports = GoodProvision;

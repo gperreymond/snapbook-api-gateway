@@ -1,6 +1,6 @@
 'use strict';
 
-var Joi = require("joi");
+var Joi = require('joi');
 
 var routes = [];
 var plugin = 'slack';
@@ -16,7 +16,7 @@ routes.push({
   path: '/slack/message',
   handler: function (request, reply) {
     request.server.services_discovery.isRegistered(plugin, function(registered) {
-      if (registered==false) {
+      if (registered===false) {
         reply({
           'statusCode': 404,
           'error': 'Not Found',
@@ -53,14 +53,14 @@ routes.push({
   },
   config: {
     tags: ['api'],
-    description: "Poster un message sur Slack #console",
-    notes: "Poster un message sur Slack #console",
+    description: 'Poster un message sur Slack #console',
+    notes: 'Poster un message sur Slack #console',
     validate: {
       payload: {
         state: Joi.string().required().allow(['DEBUG', 'WARNING', 'INFO', 'ERROR']).description('Etat du message'),
         source: Joi.string().required().description('Source du message'),
         title: Joi.string().required().description('Titre du message'),
-        message: Joi.string().required().description('Le message')
+        message: Joi.string().required().description('Le corps message')
       }
     },
     payload: {

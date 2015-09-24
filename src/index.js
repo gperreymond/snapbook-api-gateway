@@ -37,7 +37,7 @@ async.mapSeries([
     server.route( require('./routes/'+item) );
     callback(null, item);
 }, function(err, results) {
-  console.log(err, results);
+  if (err) console.log(err, results);
 });
 
 // configure plugins
@@ -47,12 +47,13 @@ async.mapSeries([
   'good',
   'swagger'], function(item, callback) {
 	var Provision = require('./plugins/'+item);
-	var plugin = new Provision(server);
+	new Provision(server);
 	callback(null, item);
 }, function(err, results) {
-	console.log(err, results);
+	if (err) console.log(err, results);
 	// server start
 	server.start(function () { 
+		if ( process.env.NODE_ENV=='test' ) return;
 		console.log('Server running at:', server.info.uri);
 	});
 });

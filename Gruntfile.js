@@ -13,21 +13,11 @@ module.exports = function(grunt) {
       	PORT: 3000
     	},
 		},
-		run: {
-    	server: {
-				options: {
-					wait: false,
-					quiet: true
-				},
-				cmd: 'node',
-				args: ['src/index.js']
-    	}
-  	},
 		jshint: {
-			files: ['src/*.js'],
+			files: ['src/**/*.js'],
 			options: {
 			  node: true,
-				maxlen: 80,
+				maxlen: 255,
 				quotmark: 'single'
 			}
 		},
@@ -42,17 +32,12 @@ module.exports = function(grunt) {
 		}
 	});
 	
-	grunt.loadNpmTasks('grunt-env');
-	grunt.loadNpmTasks('grunt-run');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-simple-mocha');
 	
 	grunt.registerTask('test', [
 		'jshint',
-		'env:tests_suite', 
-		'run:server', 
-		'simplemocha',
-		'stop:server'
+		'simplemocha'
 	]);
 	
 };

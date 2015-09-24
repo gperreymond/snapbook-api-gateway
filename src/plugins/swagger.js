@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var HapiSwagger = require('hapi-swaggered');
 var HapiSwaggerUI = require('hapi-swaggered');
@@ -9,7 +9,7 @@ var SwaggerProvision = function(server) {
     info: {
       version: '2.5.1',
       title: 'API GATEWAY',
-      description: "API Gateway pour l'application snapbook"
+      description: 'API Gateway pour l\'application snapbook'
     },
     cors: true
   };

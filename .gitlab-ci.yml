@@ -1,4 +1,6 @@
 test:
+  before_script:
+  - node --version
   script:
   - npm install
   - npm test

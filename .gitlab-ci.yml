@@ -4,10 +4,11 @@ stages:
   - build
   - test
 
+before_script:
+  - npm install -g grunt
+
 job_build:
   stage: build
-  before_script:
-    - npm install -g grunt
   script:
     - npm install
   only: master

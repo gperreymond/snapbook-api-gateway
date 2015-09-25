@@ -2,7 +2,10 @@ image: node:0.12.7
 
 before_script:
   - node --version
+  - npm install -g mocha
+  - npm install -g grunt
+  - npm install
 
-job_build:
-  script: ls
+job_test:
+  script: npm test
 

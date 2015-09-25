@@ -1,6 +1,4 @@
-test:
-  before_script:
-  - node --version
-  script:
+image: node:0.12.7
+before_script:
   - npm install
-  - npm test
+

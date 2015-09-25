@@ -6,18 +6,7 @@ before_script:
   - npm install -g grunt-cli
   - npm install
 
-stages:
-  - test
-  - deploy
-
 job_test:
-  type: test
   script: npm test
-  only:
-    - master
-
-job_deploy:
-  type: deploy
-  script: git push --force --yes git@github.com:gperreymond/snapbook-api-gateway.git
   only:
     - master

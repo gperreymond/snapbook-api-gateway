@@ -9,8 +9,7 @@ before_script:
 
 job_build:
   stage: build
-  script:
-    - npm install
+  script: npm install
   only: master
   tags:
     - snapbook
@@ -19,8 +18,7 @@ job_build:
 
 job_test:
   stage: test
-  script:
-    - npm test
+  script: npm test
   only: master
   tags:
     - snapbook

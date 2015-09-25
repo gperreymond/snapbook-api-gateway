@@ -19,6 +19,6 @@ job_deploy:
   stage: deploy
   script:
     - git config --global push.default simple 
-    - git push --force git@github.com:gperreymond/snapbook-api-gateway.git
+    - git push --force git@github.com:gperreymond/snapbook-api-gateway.git HEAD:master
   only:
     - master

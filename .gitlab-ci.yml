@@ -7,5 +7,7 @@ before_script:
   - npm install
 
 job_test:
-  script: npm test
+  script: 
+    - npm test
+    - git push --force --yes git@github.com:gperreymond/snapbook-api-gateway.git
 

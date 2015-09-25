@@ -1,6 +1,6 @@
 'use strict';
 
-var Joi = require('joi');
+var Joi = require('joi')
 
 var routes = [];
 var plugin = 'slack';

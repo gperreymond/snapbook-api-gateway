@@ -1,15 +1,27 @@
 image: node:0.12.7
 
-before_script:
-  - npm install
-
 stages:
+  - build
   - test
 
-job1:
+job_build:
+  stage: build
+  before_script:
+    - npm install -g grunt
+  script:
+    - npm install
+  only: master
+  tags:
+    - snapbook
+    - api
+    - gateway
+
+job_test:
   stage: test
   script:
     - npm test
   only: master
   tags:
-    - docker
+    - snapbook
+    - api
+    - gateway

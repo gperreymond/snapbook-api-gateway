@@ -8,5 +8,3 @@ before_script:
 
 job_test:
   script: npm test
-  only:
-    - master

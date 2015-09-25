@@ -1,23 +1,24 @@
 image: node:0.12.7
 
-before_script:
-  - node --version
-  - npm install -g mocha
-  - npm install -g grunt-cli
-  - npm install
-
 stages:
   - test
   - deploy
 
 job_test:
   stage: test
-  script: npm test
+  script:
+    - node --version
+    - npm install -g mocha
+    - npm install -g grunt-cli
+    - npm install 
+    - npm test
   only:
     - master
 
 job_deploy:
   stage: deploy
-  script: git push --force git@github.com:gperreymond/snapbook-api-gateway.git
+  script:
+    - git config --global push.default simple 
+    - git push --force git@github.com:gperreymond/snapbook-api-gateway.git
   only:
     - master

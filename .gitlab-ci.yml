@@ -18,6 +18,6 @@ job_test:
 
 job_deploy:
   stage: deploy
-  script: git push --force --yes git@github.com:gperreymond/snapbook-api-gateway.git
+  script: git push --force git@github.com:gperreymond/snapbook-api-gateway.git
   only:
     - master

@@ -5,10 +5,10 @@ var Joi = require('joi');
 var routes = [];
 var plugin = 'slack';
 
-var responseModel = Joi.object({
-    equals: Joi.number(),
+var SlackResponseModel = Joi.object({
+  done: Joi.boolean().required(),
 }).meta({
-  className: 'Result'
+  className: 'SlackResponseModel'
 });
 
 routes.push({
@@ -33,17 +33,17 @@ routes.push({
             seneca.act({
               role: 'slack', 
               cmd: 'message',
-              source: request.payload.source,
+              username: request.payload.username,
               state: request.payload.state,
               title: request.payload.title,
               message: request.payload.message
             }, function( err_seneca, result_seneca ) {
               if (err_seneca) {
-                console.log(err_seneca,result_seneca);
+                console.log(err_seneca, result_seneca);
                 reply(err_seneca).code(500);
                 return seneca.close();
               } else {
-                reply(result_seneca);
+                reply({done:(result_seneca.result=='ok')});
                 return seneca.close();
               }
             });
@@ -57,8 +57,8 @@ routes.push({
     notes: 'Poster un message sur Slack #console',
     validate: {
       payload: {
-        state: Joi.string().required().allow(['DEBUG', 'WARNING', 'INFO', 'ERROR']).description('Etat du message'),
-        source: Joi.string().required().description('Source du message'),
+        username: Joi.string().required().description('Utilisateur postant le message'),
+        state: Joi.string().required().allow(['DEBUG', 'WARNING', 'INFO', 'ERROR']).description('Etat/couleur du message'),
         title: Joi.string().required().description('Titre du message'),
         message: Joi.string().required().description('Le corps message')
       }
@@ -66,7 +66,7 @@ routes.push({
     payload: {
       allow: 'application/x-www-form-urlencoded',
     },
-    response: {schema: responseModel}
+    response: {schema: SlackResponseModel}
   }
 });
 

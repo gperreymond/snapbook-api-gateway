@@ -7,7 +7,7 @@ var SwaggerProvision = function(server) {
   // swagger
   var options = {
     info: {
-      version: '2.5.1',
+      version: '2.5.2',
       title: 'API GATEWAY',
       description: 'API Gateway pour l\'application snapbook'
     },

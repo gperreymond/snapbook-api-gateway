@@ -3,11 +3,6 @@
 var async = require('async');
 var _ =  require('lodash');
 var Hapi = require('hapi');
-var ServicesDiscovery = require('./services-discovery');
-
-// declare hapi plugin services discovery
-
-Hapi.Server.prototype.services_discovery = new ServicesDiscovery();
 
 // configure server
 
@@ -24,11 +19,6 @@ server.connection({
 	port: process.env.PORT || 8080,
 	labels: ['api']
 });
-
-// configure services discovery
-
-var io = require('socket.io')(server.listener);
-server.services_discovery.initialize(io);
 
 // hapijs provisionning
 

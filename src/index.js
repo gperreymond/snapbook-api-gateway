@@ -30,27 +30,23 @@ server.connection({
 var io = require('socket.io')(server.listener);
 server.services_discovery.initialize(io);
 
-// configure routes
+// hapijs provisionning
 
-async.mapSeries([
-  'slack'], function(item, callback) {
-    server.route( require('./routes/'+item) );
+var provisions = require('./provisions');
+async.mapSeries(provisions, function(item, callback) {
+  // hapijs plugins provision
+  if (item.type=='plugin') {
+  	var Provision = require('./plugins/'+item.name);
+		new Provision(server);
+		callback(null, item);
+  }
+  // hapijs routes provision
+  if (item.type=='route') {
+  	server.route( require('./routes/'+item.name) );
     callback(null, item);
+  }
 }, function(err, results) {
   if (err) console.log(err, results);
-});
-
-// configure plugins
-
-async.mapSeries([
-  'blipp', 
-  'good',
-  'swagger'], function(item, callback) {
-	var Provision = require('./plugins/'+item);
-	new Provision(server);
-	callback(null, item);
-}, function(err, results) {
-	if (err) console.log(err, results);
 	// server start
 	server.start(function () { 
 		if ( process.env.NODE_ENV=='test' ) return;

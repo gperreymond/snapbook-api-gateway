@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git add -i
-git commit -m "commit with script.sh"
-git push origin master
+git commit -m $2
+git push origin $1

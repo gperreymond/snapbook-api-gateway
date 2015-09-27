@@ -78,8 +78,8 @@ describe('endpoint /slack/message', function () {
     .post('/slack/message')
     .type('form')
     .send({
-      state: 'STATE', 
-      source: 'SOURCE',
+      username: 'USERNAME',
+      state: 'STATE',
       title: 'TITLE',
       message: 'MESSAGE'
     })

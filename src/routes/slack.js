@@ -1,6 +1,7 @@
 'use strict';
 
 var Joi = require('joi');
+var Boom = require('boom');
 
 var routes = [];
 var plugin = 'slack';
@@ -15,8 +16,8 @@ routes.push({
   method: 'POST',
   path: '/slack/message',
   handler: function (request, reply) {
-    var seneca = require('seneca')({timeout:1500})
-      .client({type:'tcp'})
+    require('seneca')({timeout:1500})
+      .client({type:'tcp', port:10101})
       .act({
         role: 'slack', 
         cmd: 'message',
@@ -24,17 +25,10 @@ routes.push({
         state: request.payload.state,
         title: request.payload.title,
         message: request.payload.message
-      }, function( err_seneca, result_seneca ) {
-        if (err_seneca) {
-          reply({
-            'statusCode': 404,
-            'error': 'Not Found',
-            'message': '['+plugin+']'+' - Service not registered'
-          }).code(404);
-        } else {
-          reply({done:(result_seneca.result=='ok')});
-          return seneca.close();
-        }
+      }, function( error_seneca, result_seneca ) {
+        if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('['+plugin+']'+' - Service not running'));
+        if (error_seneca) return reply(Boom.badImplementation(error_seneca));
+        return reply(result_seneca);
       });
   },
   config: {

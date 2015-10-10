@@ -1,23 +1,24 @@
-'use strict';
+'use-strict';
 
-var Blipp = require('blipp');
+var Good = require('good');
 
-var GoodProvision = function(server) {
-  var options = {
-    opsInterval: 1000,
-    reporters: [{
-      reporter: require('good-console'),
-      events: { log: '*', response: '*' }
-    }]
-  };
-  server.register({
-    register: require('good'),
-    options: options
-  }, function (err) {
-    if (err) return console.log(err);
-  });
+var options = {
+  reporters: [{
+    reporter: require('good-console'),
+    events: { log: '*', response: '*' }
+  }] 
 };
 
-if ( process.env.NODE_ENV=='test' ) GoodProvision = function(server) {};
+var GoodProvision = function(server) {
+  server.register({
+    register: Good,
+    options: options
+  }, function (err) {
+    
+    if (err) return console.log(err);
+    console.log('GoodProvision', 'registered');
+    
+  });
+};
 
 module.exports = GoodProvision;

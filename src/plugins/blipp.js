@@ -4,10 +4,11 @@ var Blipp = require('blipp');
 
 var BlippProvision = function(server) {
   server.register(Blipp, function(err) {
+    
     if (err) return console.log(err);
+    console.log('BlippProvision', 'registered');
+    
   });
 };
-
-if ( process.env.NODE_ENV=='test' ) BlippProvision = function(server) {};
 
 module.exports = BlippProvision;

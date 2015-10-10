@@ -1,15 +1,15 @@
 # Pull base image from stock node image.
-FROM node:0.12.7
+FROM node:4.1.2
 
 # Maintainer
 MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
 
-# Add the current working folder as a mapped folder at /usr/src/app
-COPY ./package.json /usr/src/app/package.json
-COPY ./src /usr/src/app
+# Add the current working folder as a mapped folder at /app
+COPY ./package.json /app/package.json
+COPY ./src /app
 
 # Set the current working directory to the new mapped folder.
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install application's dependencies
 RUN npm install --production

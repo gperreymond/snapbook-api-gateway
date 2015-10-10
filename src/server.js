@@ -5,8 +5,8 @@ var Routes = require('./routes');
 
 // !-- FOR TESTS
 var options = {
-  host: process.env.ABIBAO_API_REST_EXPOSE_HOST || '0.0.0.0',
-  port: process.env.ABIBAO_API_REST_EXPOSE_PORT || 8080,
+  host: process.env.API_GATEWAY_EXPOSE_HOST || '0.0.0.0',
+  port: process.env.API_GATEWAY_EXPOSE_PORT || 8080,
   labels: ['api']
 };
 // --!

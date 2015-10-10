@@ -38,7 +38,7 @@ exports.message = {
   response: {schema: SlackResponseModel},
   handler: function(request, reply) {
     require('seneca')({timeout:1500})
-    .client({type:'tcp', port:10101})
+    .client({type:'tcp', host: '0.0.0.0', port: 10101})
     .act({
       role: 'slack', 
       cmd: 'message',

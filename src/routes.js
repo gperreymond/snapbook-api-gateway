@@ -1,9 +1,13 @@
 'use-strict';
 
-var SlackController = require('./controllers/slack');
+var MessagesController = require('./controllers/messages');
+var DataController = require('./controllers/data');
 
 exports.endpoints = [
   // slack
-  { method: 'GET', path: '/slack/alive', config: SlackController.alive},
-  { method: 'POST', path: '/slack/message', config: SlackController.message}
+  { method: 'GET', path: '/microservices/slack/alive', config: MessagesController.alive},
+  { method: 'POST', path: '/messages/post', config: MessagesController.message},
+  // applications
+  { method: 'GET', path: '/microservices/data/alive', config: DataController.alive},
+  { method: 'GET', path: '/applications', config: DataController.list},
 ];

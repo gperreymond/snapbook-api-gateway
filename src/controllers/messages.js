@@ -3,6 +3,16 @@
 var Joi = require('joi');
 var Boom = require('boom');
 
+// seneca microservice framework
+var seneca = require('seneca')({
+  timeout: 3000
+});
+var client = seneca.client({
+  type:'tcp', 
+  host: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_ADDR || '0.0.0.0', 
+  port: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_PORT || 10101
+});
+
 var SlackResponseModel = Joi.object({
   done: Joi.boolean().required(),
 }).meta({
@@ -11,17 +21,24 @@ var SlackResponseModel = Joi.object({
 
 exports.alive = {
   auth: false,
-  tags: ['api', 'slack'],
-  description: 'Tester si le microservice slack est en vie ou pas.',
-  notes: 'Tester si le microservice slack est en vie ou pas.',
+  tags: ['api', 'microservices'],
+  description: 'Tester si le microservice /slack/ est en vie ou pas.',
+  notes: 'Tester si le microservice /slack/ est en vie ou pas.',
   handler: function(request, reply) {
-    return reply(Boom.notFound('Not yet implemented'));
+    client.act({
+      role: 'slack', 
+      cmd: 'alive'
+    }, function( error_seneca, result_seneca ) {
+      if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[slack] microservice is not alive'));
+      if (error_seneca) return reply(Boom.badImplementation(error_seneca));
+      return reply(result_seneca);
+    });
   }
 };
 
 exports.message = {
   auth: false,
-  tags: ['api', 'slack'],
+  tags: ['api', 'messages'],
   description: 'Poster un message sur snapbook/slack #console.',
   notes: 'Poster un message sur snapbook/slack #console.',
   validate: {
@@ -37,9 +54,7 @@ exports.message = {
   },
   response: {schema: SlackResponseModel},
   handler: function(request, reply) {
-    require('seneca')({timeout:1500})
-    .client({type:'http', host: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_ADDR || '0.0.0.0', port: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_PORT || 10101})
-    .act({
+    client.act({
       role: 'slack', 
       cmd: 'message',
       username: request.payload.username,
@@ -47,7 +62,7 @@ exports.message = {
       title: request.payload.title,
       message: request.payload.message
     }, function( error_seneca, result_seneca ) {
-      if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[slack]'+' microservice is not alive'));
+      if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[slack] microservice is not alive'));
       if (error_seneca) return reply(Boom.badImplementation(error_seneca));
       return reply(result_seneca);
     });

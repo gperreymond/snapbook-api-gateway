@@ -26,7 +26,7 @@
     "joi": "6.6.1",
     "lodash": "3.10.1",
     "resolve-app-pkginfo": "1.0.0",
-    "seneca": "0.6.5",
+    "seneca": "0.7.1",
     "vision": "3.0.0"
   },
   "devDependencies": {

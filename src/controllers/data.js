@@ -19,7 +19,14 @@ exports.alive = {
   description: 'Tester si le microservice /data/ est en vie ou pas.',
   notes: 'Tester si le microservice /data/ est en vie ou pas.',
   handler: function(request, reply) {
-    return reply(Boom.notFound('Not yet implemented'));
+    client.act({
+      role: 'controller', 
+      cmd: 'data/alive'
+    }, function( error_seneca, result_seneca ) {
+      if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[slack] microservice is not alive'));
+      if (error_seneca) return reply(Boom.badImplementation(error_seneca));
+      return reply(result_seneca);
+    });
   }
 };
 
@@ -30,7 +37,7 @@ exports.list = {
   notes: 'Retourne la liste des applications.',
   handler: function(request, reply) {
     client.act({
-      role: 'data', 
+      role: 'controller',
       cmd: 'applications/list'
     }, function( error_seneca, result_seneca ) {
       if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[data] microservice is not alive'));

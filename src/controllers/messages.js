@@ -26,8 +26,8 @@ exports.alive = {
   notes: 'Tester si le microservice /slack/ est en vie ou pas.',
   handler: function(request, reply) {
     client.act({
-      role: 'slack', 
-      cmd: 'alive'
+      role: 'controller', 
+      cmd: 'slack/alive'
     }, function( error_seneca, result_seneca ) {
       if (error_seneca && error_seneca.timeout===true) return reply(Boom.notFound('[slack] microservice is not alive'));
       if (error_seneca) return reply(Boom.badImplementation(error_seneca));
@@ -55,8 +55,8 @@ exports.message = {
   response: {schema: SlackResponseModel},
   handler: function(request, reply) {
     client.act({
-      role: 'slack', 
-      cmd: 'message',
+      role: 'controller', 
+      cmd: 'slack/message',
       username: request.payload.username,
       state: request.payload.state,
       title: request.payload.title,

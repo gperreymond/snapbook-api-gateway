@@ -5,6 +5,7 @@ FROM node:4.1.2
 MAINTAINER Gilles Perreymond <gperreymond@gmail.com>
 
 # Add the current working folder as a mapped folder at /app
+COPY ./newrelic.js /app/newrelic.js
 COPY ./package.json /app/package.json
 COPY ./src /app
 
@@ -13,6 +14,7 @@ WORKDIR /app
 
 # Install application's dependencies
 RUN npm install --production
+RUN npm install newrelic
 
 # Expose port
 EXPOSE 80

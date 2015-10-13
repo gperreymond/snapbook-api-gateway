@@ -9,8 +9,8 @@ var seneca = require('seneca')({
 });
 var client = seneca.client({
   type:'tcp', 
-  host: process.env.SNAPBOOK_MICROSERVICE_XXX_XXX_PORT_10102_TCP_ADDR || '0.0.0.0', 
-  port: process.env.SNAPBOOK_MICROSERVICE_XXX_XXX_PORT_10102_TCP_PORT || 10102
+  host: process.env.SNAPBOOK_MICROSERVICE_DATA_846CF322_PORT_10101_TCP_ADDR || '0.0.0.0', 
+  port: process.env.SNAPBOOK_MICROSERVICE_DATA_846CF322_PORT_10101_TCP_PORT || 10102
 });
 
 exports.alive = {

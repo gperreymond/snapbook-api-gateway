@@ -9,5 +9,5 @@ exports.endpoints = [
   { method: 'POST', path: '/messages/post', config: MessagesController.message},
   // applications
   { method: 'GET', path: '/microservices/data/alive', config: DataController.alive},
-  { method: 'GET', path: '/applications', config: DataController.list},
+  { method: 'GET', path: '/applications', config: DataController.list}
 ];

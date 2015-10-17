@@ -3,16 +3,8 @@
 var Joi = require('joi');
 var Boom = require('boom');
 
-// seneca microservice framework
-var seneca = require('seneca')({
-  timeout: 3000
-});
-var client = seneca.client({
-  type:'tcp', 
-  host: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_ADDR || '0.0.0.0', 
-  port: process.env.SNAPBOOK_MICROSERVICE_SLACK_B94DAC70_PORT_10101_TCP_PORT || 10101
-});
 
+/**
 var SlackResponseModel = Joi.object({
   done: Joi.boolean().required(),
 }).meta({
@@ -67,4 +59,4 @@ exports.message = {
       return reply(result_seneca);
     });
   }
-};
+}; **/

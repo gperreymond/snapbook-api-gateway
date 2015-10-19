@@ -1,10 +1,13 @@
 'use-strict';
 
+var VolumesController = require('./controllers/volumes');
 var DiscoveryController = require('./controllers/services-discovery');
 var ApplicationsController = require('./controllers/applications');
 var PatternsController = require('./controllers/patterns');
 
 exports.endpoints = [
+  // volumes
+  { method: 'GET', path: '/media/{param*}', config: VolumesController.media},
   // microservices
   { method: 'GET', path: '/microservices/slack/alive', config: DiscoveryController.slack_alive},
   { method: 'GET', path: '/microservices/data/alive', config: DiscoveryController.data_alive},

@@ -1,4 +1,4 @@
-'use-strict';
+"use strict";
 
 if (process.env.SNAPBOOK_API_GATEWAY_REQUIRE_NEWRELIC) require('newrelic');
 

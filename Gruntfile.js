@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = function(grunt) {
 	var banner = '/*n<%= pkg.name %> <%= pkg.version %>';
@@ -17,8 +17,9 @@ module.exports = function(grunt) {
 			files: ['src/**/*.js'],
 			options: {
 			  node: true,
-				maxlen: 255,
-				quotmark: 'single'
+			  strict: true,
+				undef: true,
+				unused: true
 			}
 		},
 		simplemocha: {

@@ -1,4 +1,4 @@
-'use-strict';
+"use strict";
 
 var VolumesController = require('./controllers/volumes');
 var DiscoveryController = require('./controllers/services-discovery');

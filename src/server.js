@@ -22,14 +22,17 @@ var server = new Hapi.Server({
 
 server.connection(options);
 
-var async = require('async');
-async.mapSeries(['swagger', 'blipp', 'good'], function(item, callback) {
-  require('./plugins/'+item)(server);
-  callback(null, item);
-}, function(err, results) {
+if (!process.env.SNAPBOOK_NPM_TEST_PROCESS) {
+  var async = require('async');
+  async.mapSeries(['swagger', 'blipp', 'good'], function(item, callback) {
+    require('./plugins/'+item)(server);
+    callback(null, item);
+  }, function(err, results) {
+    server.route(Routes.endpoints);
+  });
+} else {
   server.route(Routes.endpoints);
-});
-
+}
 // !-- FOR TESTS
 module.exports = server;
 // --!

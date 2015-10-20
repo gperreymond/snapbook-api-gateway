@@ -9,7 +9,7 @@ exports.endpoints = [
   // volumes
   { method: 'GET', path: '/media/{param*}', config: VolumesController.media},
   // microservices
-  { method: 'GET', path: '/microservices/slack/alive', config: DiscoveryController.slack_alive},
+  { method: 'GET', path: '/microservices/opencv/alive', config: DiscoveryController.opencv_alive},
   { method: 'GET', path: '/microservices/data/alive', config: DiscoveryController.data_alive},
   // applications
   { method: 'GET', path: '/applications', config: ApplicationsController.list},

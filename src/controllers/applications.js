@@ -16,7 +16,7 @@ exports.list = {
   handler: function(request, reply) {
     http_request
     .get( uri+'/applications', function(error, response, body) {
-      if (error && error.code=='ECONNREFUSED') return reply({alive:false});
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
       return reply(JSON.parse(body)).code(response.statusCode);
     });
   }
@@ -35,7 +35,7 @@ exports.read = {
   handler: function(request, reply) {
     http_request
     .get( uri+'/applications/'+request.params.id, function(error, response, body) {
-      if (error && error.code=='ECONNREFUSED') return reply({alive:false});
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
       return reply(JSON.parse(body)).code(response.statusCode);
     });
   }

@@ -19,7 +19,8 @@ module.exports = function(grunt) {
 			  node: true,
 			  strict: true,
 				undef: true,
-				unused: true
+				unused: true,
+				eqeqeq: true
 			}
 		},
 		simplemocha: {

@@ -18,7 +18,7 @@ exports.data_alive = {
   handler: function(request, reply) {
     http_request
     .get( uri_data+'/alive', function(error, response, body) {
-      if (error && error.code=='ECONNREFUSED') return reply({alive:false});
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
       return reply(JSON.parse(body)).code(response.statusCode);
     });
   }
@@ -32,7 +32,7 @@ exports.opencv_alive = {
   handler: function(request, reply) {
     http_request
     .get( uri_opencv+'/alive', function(error, response, body) {
-      if (error && error.code=='ECONNREFUSED') return reply({alive:false});
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
       return reply(JSON.parse(body)).code(response.statusCode);
     });
   }

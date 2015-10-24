@@ -76,7 +76,8 @@ exports.batch = {
   },
   handler: function(request, reply) {
     // list all directory patterns
-    dir.readFiles('/home/ubuntu/workspace/applications/AZER1234/patterns', {
+    var volumes_applications = process.env.SNAPBOOK_API_GATEWAY_VOLUMES_APPLICATIONS || '/home/ubuntu/workspace/applications';
+    dir.readFiles(volumes_applications+'/'+request.params.id+'/patterns', {
       match: /.jpg$/,
       exclude: /^\./
     }, function(err, content, next) {

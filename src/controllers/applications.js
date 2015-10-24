@@ -1,8 +1,11 @@
 "use strict";
 
 var http_request = require('request');
+var dir = require('node-dir');
+var async = require('async');
 
 var Joi = require('joi');
+var Boom = require('boom');
 
 var host_data = process.env.SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_ADDR || 'localhost';
 var port_data = process.env.SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_PORT || 10102;
@@ -58,5 +61,51 @@ exports.compare = {
       if (error && error.code==='ECONNREFUSED') return reply({alive:false});
       return reply(JSON.parse(body)).code(response.statusCode);
     });
+  }
+};
+
+exports.batch = {
+  auth: false,
+  tags: ['api', 'applications'],
+  description: 'Compute tous les patterns d\'une application pour extraire les keypoints et les descriptors.',
+  notes: 'Compute tous les patterns d\'une application pour extraire les keypoints et les descriptors.',
+  validate: {
+    params: {
+      id: Joi.string().required().description('ID du l\'application')
+    }
+  },
+  handler: function(request, reply) {
+    // list all directory patterns
+    dir.readFiles('/home/ubuntu/workspace/applications/AZER1234/patterns', {
+      match: /.jpg$/,
+      exclude: /^\./
+    }, function(err, content, next) {
+      if (err) return reply(Boom.badImplementation());
+      next();
+    },
+    function(err, files){
+      if (err) return reply(Boom.badImplementation());
+      // run all single computing processes
+      async.mapLimit(files, 10, 
+        function(item, cb) {
+          var payload = {
+            filepath: item
+          };
+          http_request.post( uri_opencv+'/compute', { form: payload }, function(error, response, body) {
+            if (error) return cb(error, null);
+            cb(null, body);
+          });
+        }, function(err, results) {
+          if (err && err.code==='ECONNREFUSED') return reply({alive:false});
+          if (err) return reply(Boom.badImplementation());
+          reply(results);
+        }
+      );
+    });
+    
+    /**http_request.post( uri_opencv+'/compute', { form: request.payload }, function(error, response, body) {
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
+      return reply(JSON.parse(body)).code(response.statusCode);
+    });**/
   }
 };

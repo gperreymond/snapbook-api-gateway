@@ -25,6 +25,7 @@
     "inert": "3.1.0",
     "joi": "6.6.1",
     "lodash": "3.10.1",
+    "node-dir": "0.1.10",
     "request": "2.65.0",
     "resolve-app-pkginfo": "1.0.0",
     "vision": "3.0.0"

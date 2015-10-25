@@ -5,8 +5,8 @@ var Routes = require('./routes');
 
 // !-- FOR TESTS
 var options = {
-  host: process.env.SNAPBOOK_API_GATEWAY_ADDR || '0.0.0.0',
-  port: process.env.SNAPBOOK_API_GATEWAY_PORT || 8080,
+  host: process.env.IP || '0.0.0.0',
+  port: process.env.PORT || 8080,
   labels: ['api']
 };
 // --!
@@ -22,7 +22,7 @@ var server = new Hapi.Server({
 
 server.connection(options);
 
-if (!process.env.SNAPBOOK_NPM_TEST_PROCESS) {
+if (!process.env.ENABLE_NPM_TEST) {
   var async = require('async');
   async.mapSeries(['swagger', 'blipp', 'good'], function(item, callback) {
     require('./plugins/'+item)(server);

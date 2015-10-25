@@ -1,18 +1,13 @@
 # snapbook
 ## api / gateway
 
-- SNAPBOOK_API_GATEWAY_ADDR
-- SNAPBOOK_API_GATEWAY_PORT
-- SNAPBOOK_API_GATEWAY_REQUIRE_NEWRELIC
-- SNAPBOOK_API_GATEWAY_VOLUMES_APPLICATIONS
-- SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_ADDR
-- SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_PORT
-- SNAPBOOK_MICROSERVICE_OPENCV_022F4E17_ENV_TUTUM_SERVICE_FQDN
-- SNAPBOOK_MICROSERVICE_OPENCV_022F4E17_PORT_10101_TCP_PORT
-- SNAPBOOK_NPM_TEST_PROCESS
+- ENABLE_NEWRELIC
+- ENABLE_NPM_TEST
 
-Mettre "SNAPBOOK_API_GATEWAY_REQUIRE_NEWRELIC=1" via tutum pour activer le monitoring.
-Mettre "SNAPBOOK_NPM_TEST_PROCESS=1" avant d'effectuer les tests.
+/volumes/applications
+
+"ENABLE_NEWRELIC = 1" via tutum pour activer le monitoring.
+"ENABLE_NPM_TEST = 1" via ckoud9 pour activer les tests.
 
 [![build status](https://gitlab.com/ci/projects/6885/status.png?ref=master)](https://gitlab.com/ci/projects/6885?ref=master)
 

@@ -1,6 +1,6 @@
 "use strict";
 
-if (process.env.SNAPBOOK_API_GATEWAY_REQUIRE_NEWRELIC) require('newrelic');
+if (process.env.ENABLE_NEWRELIC) require('newrelic');
 
 var server = require('./server');
 server.start(function() {

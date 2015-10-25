@@ -5,8 +5,6 @@ var DiscoveryController = require('./controllers/services-discovery');
 var ApplicationsController = require('./controllers/applications');
 var PatternsController = require('./controllers/patterns');
 
-console.log(process.env.SNAPBOOK_API_GATEWAY_VOLUMES_APPLICATIONS);
-
 exports.endpoints = [
   // volumes
   { method: 'GET', path: '/media/{param*}', config: StaticDirectoryController.media},

@@ -88,8 +88,10 @@ exports.batch = {
             filepath: item
           };
           http_request.post( uri_opencv+'/compute', { form: payload }, function(error, response, body) {
-            if (error) return cb(error, null);
-            cb(null, body);
+            if (error) return cb(null, {item: item, compute: false});
+            var r = JSON.parse(body);
+            r.item = item;
+            cb(null, r);
           });
         }, function(err, results) {
           if (err && err.code==='ECONNREFUSED') return reply({alive:false});
@@ -98,10 +100,5 @@ exports.batch = {
         }
       );
     });
-    
-    /**http_request.post( uri_opencv+'/compute', { form: request.payload }, function(error, response, body) {
-      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
-      return reply(JSON.parse(body)).code(response.statusCode);
-    });**/
   }
 };

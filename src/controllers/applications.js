@@ -7,13 +7,8 @@ var async = require('async');
 var Joi = require('joi');
 var Boom = require('boom');
 
-var host_data = process.env.SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_ADDR || 'localhost';
-var port_data = process.env.SNAPBOOK_MICROSERVICE_DATA_C1BFAE68_PORT_10101_TCP_PORT || 10102;
-var uri_data = 'http://'+host_data+':'+port_data;
-
-var host_opencv = process.env.SNAPBOOK_MICROSERVICE_OPENCV_022F4E17_PORT_10101_TCP_ADDR || 'localhost';
-var port_opencv = process.env.SNAPBOOK_MICROSERVICE_OPENCV_022F4E17_PORT_10101_TCP_PORT || 10101;
-var uri_opencv = 'http://'+host_opencv+':'+port_opencv;
+var uri_data = process.env.SNAPBOOK_MICROSERVICE_DATA_URI || 'http://localhost:10102';
+var uri_opencv = process.env.SNAPBOOK_MICROSERVICE_OPENCV_URI || 'http://localhost:10101';
 
 exports.list = {
   auth: false,

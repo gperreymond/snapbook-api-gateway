@@ -3,7 +3,7 @@
 var Joi = require('joi');
 var http_request = require('request');
 
-var uri_data = process.env.SNAPBOOK_MICROSERVICE_DATA_URI || 'http://localhost:10102';
+var uri_data = process.env.SNAPBOOK_MICROSERVICE_DATA_URL || 'http://localhost:10102';
 
 exports.auth_local = {
   auth: false,

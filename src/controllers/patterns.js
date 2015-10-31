@@ -4,8 +4,8 @@ var http_request = require('request');
 
 var Joi = require('joi');
 
-var uri_data = process.env.SNAPBOOK_MICROSERVICE_DATA_URI || 'http://localhost:10102';
-var uri_opencv = process.env.SNAPBOOK_MICROSERVICE_OPENCV_URI || 'http://localhost:10101';
+var uri_data = process.env.SNAPBOOK_MICROSERVICE_DATA_URL || 'http://localhost:10102';
+var uri_opencv = process.env.SNAPBOOK_MICROSERVICE_OPENCV_URL || 'http://localhost:10101';
 
 exports.read = {
   auth: false,

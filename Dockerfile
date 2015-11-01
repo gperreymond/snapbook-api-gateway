@@ -16,5 +16,8 @@ WORKDIR /app
 RUN npm install --production
 RUN npm install newrelic
 
+# Expose port
+EXPOSE 80
+
 # Running
 CMD node .

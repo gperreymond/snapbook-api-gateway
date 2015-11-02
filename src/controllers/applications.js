@@ -76,11 +76,14 @@ exports.batch = {
       match: /.jpg$/,
       exclude: /^\./
     }, function(err, content, next) {
-      if (err) return reply(Boom.badImplementation());
-      next();
+      next(err);
     },
     function(err, files){
-      if (err) return reply(Boom.badImplementation());
+      if (err) {
+        console.log(err);
+        var boomError = Boom.create(400, err);
+        return reply(boomError);
+      }
       // run all single computing processes
       async.mapLimit(files, 10, 
         function(item, cb) {

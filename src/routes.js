@@ -15,11 +15,13 @@ exports.endpoints = [
   // auth
   { method: 'POST', path: '/auth/local', config: UsersController.auth_local},
   // applications
+  { method: 'POST', path: '/applications', config: ApplicationsController.create},
   { method: 'GET', path: '/applications', config: ApplicationsController.list},
   { method: 'GET', path: '/applications/{id}', config: ApplicationsController.read},
   { method: 'POST', path: '/applications/{id}/compare', config: ApplicationsController.compare},
   { method: 'POST', path: '/applications/{id}/batch/patterns', config: ApplicationsController.batch},
   // patterns
+  { method: 'POST', path: '/patterns', config: PatternsController.create},
   { method: 'GET', path: '/patterns/{id}', config: PatternsController.read},
   { method: 'POST', path: '/patterns/{id}/compute', config: PatternsController.compute}
 ];

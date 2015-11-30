@@ -25,6 +25,28 @@ exports.read = {
   }
 };
 
+exports.create = {
+  auth: false,
+  tags: ['api', 'patterns'],
+  description: 'Crée un nouveau pattern.',
+  notes: 'Crée un nouveau pattern.',
+  payload: {
+    allow: 'application/x-www-form-urlencoded',
+  },
+  validate: {
+    payload: {
+      name: Joi.string().required().description('Nom du pattern'),
+      description: Joi.string().description('Description du pattern')
+    }
+  },
+  handler: function(request, reply) {
+    http_request.post( uri_data+'/patterns', { form: request.payload }, function(error, response, body) {
+      if (error && error.code==='ECONNREFUSED') return reply({alive:false});
+      return reply(JSON.parse(body)).code(response.statusCode);
+    });
+  }
+};
+
 exports.compute = {
   auth: false,
   tags: ['api', 'patterns'],

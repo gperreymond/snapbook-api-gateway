@@ -1,6 +1,7 @@
 "use strict";
 
 var http_request = require('request');
+var _ = require('lodash');
 var dir = require('node-dir');
 var async = require('async');
 var uuid = require('uuid');
@@ -77,7 +78,14 @@ exports.compare = {
     params: {
       id: Joi.string().required().description('ID de l\'application')
     },
-    payload: Joi.object().keys({ file: Joi.object().meta({ swaggerType: 'file' }).required().description('Snapfile à comparer') })
+    payload: Joi.object().required().keys({ 
+      file: Joi.object().meta({ swaggerType: 'file' }).required().description('Snapfile à comparer'),
+      mode: Joi.string().description('Déterminer le retour du compare, pattern par défaut')
+    })
+  },
+  payload: {
+    allow: 'multipart/form-data',
+    output: 'stream'
   },
   handler: function (request, reply) {
     var onFail = false;
@@ -98,13 +106,44 @@ exports.compare = {
       // run compare
       http_request.post( uri_opencv+'/compare/'+request.params.id, {form: request.payload}, function(error, response, body) {
         if (error && error.code==='ECONNREFUSED') return reply({alive:false});
-        return reply(JSON.parse(body)).code(response.statusCode);
+        var compare_results = JSON.parse(body);
+        var resmode;
+        if ( _.isNull(request.payload.mode) || _.isUndefined(request.payload.mode) ) {
+          resmode = 'pattern';
+        } else {
+          resmode = request.payload.mode;
+          delete request.payload.mode;
+        }
+        var final_results;
+        switch (resmode) {
+          case 'pattern':
+            final_results = _.pluck(_.sortByOrder(compare_results, 'good_matches', 'desc'), 'pattern');
+            if ( _.isArray(final_results) && final_results.length>0 ) {
+              http_request.get( uri_data+'/patterns/'+final_results[0], {form: request.payload}, function(error, response, body) {
+                if (error && error.code==='ECONNREFUSED') return reply({alive:false});
+                var final_results = JSON.parse(body);
+                if (final_results._id) {
+                  final_results = {
+                    id: final_results._id,
+                    name: final_results.name
+                  };
+                }
+                return reply(final_results).code(response.statusCode);
+              });
+            } else {
+              final_results = {};
+              return reply(final_results);
+            }
+            break;
+          case 'debug':
+            reply(compare_results);
+            break;
+          default:
+            reply(compare_results);
+            break;
+        }
       });
     });
-  },
-  payload: {
-    allow: 'multipart/form-data',
-    output: 'stream'
   }
 };
 
@@ -121,7 +160,8 @@ exports.batch = {
   handler: function(request, reply) {
     // list all directory patterns
     var volumes_applications = process.env.SNAPBOOK_VOLUMES_APPLICATIONS;
-    dir.readFiles(volumes_applications+'/'+request.params.id+'/uploads', {
+    var dir_path = path.normalize(volumes_applications+'/'+request.params.id+'/uploads'); 
+    dir.readFiles( dir_path, {
       match: /.jpg$/,
       exclude: /^\./
     }, function(err, content, next) {

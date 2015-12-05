@@ -23,5 +23,5 @@ exports.endpoints = [
   // patterns
   { method: 'POST', path: '/patterns', config: PatternsController.create},
   { method: 'GET', path: '/patterns/{id}', config: PatternsController.read},
-  { method: 'POST', path: '/patterns/{id}/compute', config: PatternsController.compute}
+  { method: 'PATCH', path: '/patterns/{id}', config: PatternsController.update}
 ];

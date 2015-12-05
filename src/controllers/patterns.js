@@ -47,7 +47,7 @@ exports.create = {
   }
 };
 
-exports.compute = {
+exports.update = {
   auth: false,
   tags: ['api', 'patterns'],
   description: 'Compute un pattern pour extraire les keypoints et les descriptors.',
@@ -56,12 +56,11 @@ exports.compute = {
     params: {
       id: Joi.string().required().description('ID du pattern')
     },
-    payload: {
-      filepath: Joi.string().required().description('chemin du fichier à compute')
-    }
+    payload: Joi.object().keys({ file: Joi.object().meta({ swaggerType: 'file' }).required().description('Pattern file to compute') })
   },
   payload: {
-    allow: 'application/x-www-form-urlencoded',
+    allow: 'multipart/form-data',
+    output: 'stream'
   },
   handler: function(request, reply) {
     http_request.post( uri_opencv+'/compute', { form: request.payload }, function(error, response, body) {
